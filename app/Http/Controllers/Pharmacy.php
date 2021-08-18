@@ -3,15 +3,12 @@
 namespace App\Http\Controllers;
 
 use Goutte\Client;
-use Illuminate\Http\Request;
 
-class OnCallPharmacy extends Controller
+class Pharmacy extends Controller
 {
-    public function Pharmacy(Request $request)
+    public function getOnCallPharmacy(String $city)
     {
         $client = new Client();
-
-        $city = $request->city;
 
         $crawler = $client->request('GET', "http://annuaire-gratuit.ma/pharmacie-garde-{$city}/garde-nuit.html");
 
