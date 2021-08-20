@@ -1,3 +1,16 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+
+.padding {
+    @apply px-6 py-4;
+}
+
+.td {
+    @apply flex items-center mr-auto pl-4 pr-1 p-1;
+}
+
+.div {
+    @apply text-sm font-medium text-gray-900 mr-auto pr-4 p-2;
+}

@@ -1,9 +1,5 @@
 @include('layouts.app')
 
-<!--
-inline-flex flex-col space-y-52 items-end justify-end pl-96 pt-80 bg-gradient-to-b from-yellow-200 to-white" style="width: 1440px; height: 1024px;
--->
-
 <body>
     <div class="bg-gradient-to-b from-blue-400 via-purple-300 to-yellow-100">
         <div class="h-screen flex flex-col">
@@ -11,7 +7,7 @@ inline-flex flex-col space-y-52 items-end justify-end pl-96 pt-80 bg-gradient-to
           <div class="container mx-auto flex flex-wrap p-5 flex-col md:flex-row items-center p-4">
             <a class="flex title-font font-medium items-center text-gray-900 mb-4 md:mb-0">
                 <img src="{{ asset('img/drapeau-maroc.png') }}" alt="" srcset=""
-                class="rounded-full h-20 w-20 flex items-center justify-center">
+                class="rounded-full h-16 w-16 flex items-center justify-center">
               <span class="ml-3 text-xl text-red-100">On-Call Pharmacy</span>
             </a>
           </div>
@@ -33,48 +29,11 @@ inline-flex flex-col space-y-52 items-end justify-end pl-96 pt-80 bg-gradient-to
                     </select>
 
                 </div>
-
             </form>
 
-              <main class="flex-1 overflow-y-auto p-4">
-                <div class="relative">
-                  <!-- Card  -->
-                  <div class="bg-white shadow-lg rounded-3xl overflow-hidden m-4 sm:flex border border-gray-600">
-                    <div class="px-6 py-4 flex flex-wrap">
-                      <tr>
-                        <td class="px-6 py-4 ">
-                          <div class="flex items-center  mr-auto pl-4 pr-1 p-1">
-                              <div class="text-sm font-medium text-gray-900 mr-auto pr-4 p-2 text-red-600">
-                                1<p class="text-red-600">İD</p>
-                              </div>
-                          </div>
-                        </td>
-                        <td class="px-6 py-4 ">
-                          <div class="flex items-center  mr-auto pl-4 pr-1 p-1">
-                              <div class="text-sm font-medium text-gray-900 mr-auto pr-4 p-2">
-                                Laboratuvar Yönetim Sertifika Paketi Paket Adı<p class="text-red-600">Paket Adı</p>
-                              </div>
-                          </div>
-                        </td>
-                        <td class="px-6 py-4 ">
-                          <div class="flex items-center  mr-auto pl-4 pr-1 p-1">
-                              <div class="text-sm font-medium text-gray-900 mr-auto pr-4 p-2">
-                                Laboratuvar Yönetim Sertifika Paketi Paket Bilgi<p class="text-red-600">Paket Bilgi</p>
-                              </div>
-                          </div>
-                        </td>
-                        <td class="px-6 py-4 ">
-                          <div class="flex items-center  mr-auto pl-4 pr-1 p-1">
-                              <div class="text-sm font-medium text-gray-900 mr-auto pr-4 p-2">
-                                PKT1 <p class="text-red-600">Paket Kodu</p>
-                              </div>
-                          </div>
-                        </td>
-                      </tr>
-                   </div>
-                 </div>
-                <!-- //Card  -->
-
+              <main class="flex-1 overflow-y-auto p-4" id="result">
+                <div class="relative" id="content">
+                    <!-- Card -->
                 </div>
               </div>
             </main>
@@ -82,13 +41,59 @@ inline-flex flex-col space-y-52 items-end justify-end pl-96 pt-80 bg-gradient-to
             <div class="flex-shrink-0 w-1/4 p-4"></div>
           </div>
           <!-- footer -->
-          <div class=" p-4">
-            Footer
+          <div class="flex justify-center items-center p-4">
+            <span class="inline-flex justify-center w-full mx-auto mt-2 mr-2 sm:ml-auto sm:mt-0">
+                <a class="ml-3 text-blue-500 hover:text-black" href="https://twitter.com/IHunte_dev" target="_blank">
+                    <i class="fab fa-twitter fa-lg"></i>
+                </a>
+                <a class="ml-3 text-blue-500 hover:text-black" href="https://github.com/IHunte" target="_blank">
+                    <i class="fab fa-github fa-lg"></i>
+                </a>
+              </span>
           </div>
         </div>
       </div>
 
-      <script>
+      <script type="text/javascript">
+
+        function display_content(data)
+        {
+            data.forEach( content => {
+                const card = `<div class="bg-white shadow-lg rounded-3xl overflow-hidden m-4 sm:flex border border-gray-600">
+                    <div class="px-6 py-4 flex flex-wrap">
+                      <tr>
+                        <td class="padding">
+                          <div class="td">
+                              <div class="div">
+                                Nom <p class="text-red-600">${content.name}</p>
+                              </div>
+                          </div>
+                        </td>
+                        <td class="padding">
+                          <div class="td">
+                              <div class="div">
+                                Adresse<p class="text-red-600">Pharmacie Leghzaoui, hay Essalam résid. Attadamoune 2 imm. 47 mag 62</p>
+                              </div>
+                          </div>
+                        </td>
+                        <td class="padding">
+                          <div class="td">
+                              <div class="div">
+                                Téléphone<p class="text-red-600">0528 32 43 43</p>
+                              </div>
+                          </div>
+                        </td>
+                      </tr>
+                   </div>
+                 </div>`;
+
+                 const ele = document.createElement('div');
+                 ele.innerHTML = card;
+                 document.querySelector('#content').appendChild(ele);
+            })
+
+        }
+
         let cities = [
             'Casablanca',
             'Marrakech',
@@ -154,15 +159,14 @@ inline-flex flex-col space-y-52 items-end justify-end pl-96 pt-80 bg-gradient-to
             }).then(function (data) {
                 // This is the JSON from our response.
                 console.log(data);
+                display_content(data);
             }).catch(function (error) {
                 // There was an error
-                console.warn('Something went wrong.', err);
+                console.warn('Something went wrong.', error);
             });
         }
 
         document.getElementById('fromCity').addEventListener('change', CallAPI);
-
-
 
     </script>
 </body>
